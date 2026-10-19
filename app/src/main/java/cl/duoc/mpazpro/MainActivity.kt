@@ -11,37 +11,27 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.lifecycleScope
+import cl.duoc.mpazpro.data.local.AppDatabase
+import cl.duoc.mpazpro.data.local.sembrarDatosSiVacio
+import cl.duoc.mpazpro.ui.navigation.AppNavHost
 import cl.duoc.mpazpro.ui.theme.ProyectoMpazproTheme
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        val db = AppDatabase.get(this)
+        lifecycleScope.launch { sembrarDatosSiVacio(db) }
         setContent {
             ProyectoMpazproTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+
+                    AppNavHost(db)
                 }
             }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ProyectoMpazproTheme {
-        Greeting("Android")
-    }
-}
+

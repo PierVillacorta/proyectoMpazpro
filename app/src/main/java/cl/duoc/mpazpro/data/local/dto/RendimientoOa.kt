@@ -1,4 +1,10 @@
 package cl.duoc.mpazpro.data.local.dto
 
-class RendimientoOa {
-}
+
+
+data class RendimientoOa(
+    val oaId: Int,
+    val codigo: String,
+    val total: Int,
+    val correctas: Int
+)
