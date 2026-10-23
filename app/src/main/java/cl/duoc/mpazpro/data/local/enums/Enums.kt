@@ -9,14 +9,32 @@ enum class Asignatura(val nombre: String) {
     HISTORIA("Historia, Geografía y Ciencias Sociales")
 }
 
-enum class EstadoContenido { BORRADOR, EN_REVISION, AUTORIZADO, PUBLICADO }
+enum class EstadoContenido(val etiqueta: String) {
+    BORRADOR("Borrador"),
+    EN_REVISION("En revisión"),
+    AUTORIZADO("Autorizado"),
+    PUBLICADO("Publicado")
+}
 
 enum class Dificultad { FACIL, MEDIA, DIFICIL }
 
 enum class Opcion { A, B, C, D }
 
-enum class OrigenMaterial { PROPIO, PUBLICO, AUTORIZADO }
 
-enum class Clasificacion { FORTALEZA, EN_DESARROLLO, NECESITA_REFUERZO }
+enum class OrigenMaterial(val etiqueta: String) {
+    PROPIO("Propio"),
+    PUBLICO("Público"),
+    AUTORIZADO("Autorizado")
+}
 
-enum class EstadoInforme { GENERADO, PENDIENTE_VALIDACION, VALIDADO }
+enum class Clasificacion(val etiqueta: String) {
+    FORTALEZA("Fortaleza"),
+    EN_DESARROLLO("En desarrollo"),
+    NECESITA_REFUERZO("Necesita refuerzo")
+}
+
+enum class EstadoInforme(val etiqueta: String) {
+    GENERADO("Generado"),
+    PENDIENTE_VALIDACION("Pendiente de validación"),
+    VALIDADO("Validado")
+}

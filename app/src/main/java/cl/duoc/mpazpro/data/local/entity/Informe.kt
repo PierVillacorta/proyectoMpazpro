@@ -21,5 +21,6 @@ data class Informe(
     val porcentaje: Int,
     val clasificacion: Clasificacion,
     val fecha: String,
-    val estado: EstadoInforme
+    val estado: EstadoInforme,
+    val docenteResponsable: String? = null   // ← nuevo: se llena al validar
 )

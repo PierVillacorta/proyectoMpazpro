@@ -13,9 +13,10 @@ import cl.duoc.mpazpro.data.local.entity.*
         Respuesta::class,
         Contenido::class,
         ConfigPrueba::class,
-        Informe::class
+        Informe::class,
+        Asignacion::class      // ← nueva
     ],
-    version = 3
+    version = 1                // ← era 3
 )
 abstract class AppDatabase : RoomDatabase() {
 
@@ -26,6 +27,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun contenidoDao(): ContenidoDao
     abstract fun configPruebaDao(): ConfigPruebaDao
     abstract fun informeDao(): InformeDao
+    abstract fun asignacionDao(): AsignacionDao
 
     companion object {
         @Volatile

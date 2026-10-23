@@ -5,6 +5,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -33,7 +34,8 @@ fun LoginScreen(db: AppDatabase, onLoginExitoso: (Usuario) -> Unit) {
             onValueChange = { vm.nombre = it },
             label = { Text("Usuario") },
             singleLine = true,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+
         )
         Spacer(Modifier.height(12.dp))
         OutlinedTextField(
@@ -43,6 +45,7 @@ fun LoginScreen(db: AppDatabase, onLoginExitoso: (Usuario) -> Unit) {
             singleLine = true,
             visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth()
+
         )
 
         vm.error?.let {
@@ -54,7 +57,8 @@ fun LoginScreen(db: AppDatabase, onLoginExitoso: (Usuario) -> Unit) {
         Button(
             onClick = { vm.iniciarSesion(onLoginExitoso) },
             enabled = !vm.cargando,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+
         ) {
             Text("Ingresar")
         }
