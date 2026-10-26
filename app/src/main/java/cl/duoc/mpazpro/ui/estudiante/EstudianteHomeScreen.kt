@@ -8,10 +8,15 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import cl.duoc.mpazpro.data.local.AppDatabase
 import cl.duoc.mpazpro.data.local.enums.Asignatura
 import cl.duoc.mpazpro.ui.components.AppScaffold
+import cl.duoc.mpazpro.ui.theme.colorTema
+import cl.duoc.mpazpro.ui.theme.colorTexto
+import cl.duoc.mpazpro.ui.theme.emoji
 
 @Composable
 fun EstudianteHomeScreen(
@@ -47,11 +52,28 @@ fun EstudianteHomeScreen(
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clickable { onUnidadClick(asignatura, unidad) }
+                            .clickable { onUnidadClick(asignatura, unidad) },
+                        colors = CardDefaults.cardColors(containerColor = asignatura.colorTema)
                     ) {
-                        Column(Modifier.padding(16.dp)) {
-                            Text(asignatura.nombre, style = MaterialTheme.typography.titleMedium)
-                            Text(unidad, style = MaterialTheme.typography.bodyMedium)
+                        Row(
+                            modifier = Modifier.padding(20.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(asignatura.emoji, fontSize = 40.sp)
+                            Spacer(Modifier.width(16.dp))
+                            Column {
+                                Text(
+                                    asignatura.nombre,
+                                    style = MaterialTheme.typography.titleMedium,
+                                    fontWeight = FontWeight.Bold,
+                                    color = asignatura.colorTexto          // ← cambio 1
+                                )
+                                Text(
+                                    unidad,
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = asignatura.colorTexto.copy(alpha = 0.9f)   // ← cambio 2
+                                )
+                            }
                         }
                     }
                 }

@@ -33,4 +33,16 @@ class DocenteInformesViewModel(
             informes = db.informeDao().delCurso(docente?.curso ?: "")
         }
     }
+    fun comoCsv(): String {
+        val encabezado = "Estudiante,Asignatura,Unidad,OA,Correctas,Incorrectas,Porcentaje," +
+                "Clasificacion,Fecha,Estado,Docente responsable"
+        val filas = informes.joinToString("\n") { i ->
+            listOf(
+                i.alumno, i.asignatura.nombre, i.unidad, i.codigoOa,
+                i.correctas.toString(), i.incorrectas.toString(), i.porcentaje.toString(),
+                i.clasificacion.etiqueta, i.fecha, i.estado.etiqueta, i.docenteResponsable ?: ""
+            ).joinToString(",") { "\"$it\"" }
+        }
+        return "\uFEFF$encabezado\n$filas"   // el BOM hace que Excel lea bien las tildes
+    }
 }

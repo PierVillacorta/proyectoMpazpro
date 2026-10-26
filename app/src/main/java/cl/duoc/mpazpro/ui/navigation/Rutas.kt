@@ -12,6 +12,17 @@ object Rutas {
     const val PRUEBA = "prueba/{usuarioId}/{asignatura}/{unidad}"
     const val RESULTADO = "resultado/{usuarioId}/{asignatura}/{unidad}/{intento}"
 
+    const val REGISTRO = "registro"
+
+    const val FORMULARIO = "formulario/{tipo}"
+
+    const val ACTIVIDADES = "actividades/{usuarioId}/{asignatura}/{unidad}"
+
+    fun actividades(usuarioId: Int, asignatura: Asignatura, unidad: String) =
+        "actividades/$usuarioId/${asignatura.name}/${Uri.encode(unidad)}"
+
+    fun formulario(tipo: String) = "formulario/$tipo"
+
     fun estudiante(id: Int) = "estudiante/$id"
     fun docente(id: Int) = "docente/$id"
     fun utp(id: Int) = "utp/$id"

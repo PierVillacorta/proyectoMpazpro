@@ -15,7 +15,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import cl.duoc.mpazpro.data.local.AppDatabase
 
 @Composable
-fun DocenteObjetivosScreen(db: AppDatabase, usuarioId: Int) {
+fun DocenteObjetivosScreen(db: AppDatabase, usuarioId: Int, onFormulario: (String) -> Unit = {}) {
     val vm: DocenteObjetivosViewModel = viewModel(
         factory = viewModelFactory { initializer { DocenteObjetivosViewModel(db, usuarioId) } }
     )
@@ -24,6 +24,15 @@ fun DocenteObjetivosScreen(db: AppDatabase, usuarioId: Int) {
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
+        item {
+            OutlinedButton(
+                onClick = { onFormulario("actividad") },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Crear nueva actividad")
+            }
+        }
+
         item {
             Text(
                 "Activa los objetivos que quieres asignar a tu curso y define cuántos intentos tendrán en la prueba final.",

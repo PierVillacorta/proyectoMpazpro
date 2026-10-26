@@ -20,5 +20,7 @@ data class Contenido(
     val titulo: String,
     val explicacion: String,
     val ejemplo: String,
-    val origen: OrigenMaterial
+    val origen: OrigenMaterial,
+    val imagen: String? = null,
+    val audio: String? = null
 )

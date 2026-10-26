@@ -37,4 +37,9 @@ enum class EstadoInforme(val etiqueta: String) {
     GENERADO("Generado"),
     PENDIENTE_VALIDACION("Pendiente de validación"),
     VALIDADO("Validado")
+
+}
+    enum class TipoActividad(val etiqueta: String, val emoji: String) {
+    ACTIVIDAD("Actividad", "📝"),
+    DESAFIO("Desafío", "🚀")
 }

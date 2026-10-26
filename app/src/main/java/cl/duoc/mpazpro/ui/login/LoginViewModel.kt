@@ -24,7 +24,6 @@ class LoginViewModel(private val db: AppDatabase) : ViewModel() {
         viewModelScope.launch {
             cargando = true
             val usuario = db.usuarioDao().login(nombre.trim(), clave)
-            cargando = false
             if (usuario == null) {
                 error = "Usuario o contraseña incorrectos"
             } else {

@@ -31,8 +31,7 @@ private val LightColorScheme = lightColorScheme(
     onSurface = TextoClaro,
     surfaceVariant = TarjetaClara,
     onSurfaceVariant = TextoSecundarioClaro,
-    surfaceContainerHighest = TarjetaClara
-)
+    surfaceContainerHighest = Color.White)
 
 private val DarkColorScheme = darkColorScheme(
     primary = Azul200,

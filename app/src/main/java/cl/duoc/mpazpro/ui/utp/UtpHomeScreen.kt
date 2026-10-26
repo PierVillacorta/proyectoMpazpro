@@ -16,7 +16,12 @@ import cl.duoc.mpazpro.data.local.enums.EstadoContenido
 import cl.duoc.mpazpro.ui.components.AppScaffold
 import androidx.compose.animation.AnimatedVisibility
 @Composable
-fun UtpHomeScreen(db: AppDatabase, usuarioId: Int, onLogout: () -> Unit) {
+fun UtpHomeScreen(
+    db: AppDatabase,
+    usuarioId: Int,
+    onLogout: () -> Unit,
+    onFormulario: (String) -> Unit = {}
+) {
     val vm: UtpViewModel = viewModel(
         factory = viewModelFactory { initializer { UtpViewModel(db) } }
     )
@@ -34,6 +39,16 @@ fun UtpHomeScreen(db: AppDatabase, usuarioId: Int, onLogout: () -> Unit) {
                     style = MaterialTheme.typography.bodyMedium
                 )
             }
+
+            item {
+                OutlinedButton(
+                    onClick = { onFormulario("contenido") },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Agregar contenido")
+                }
+            }
+
 
             items(vm.items, key = { it.oa.id }) { r ->
                 var expandido by remember { mutableStateOf(false) }

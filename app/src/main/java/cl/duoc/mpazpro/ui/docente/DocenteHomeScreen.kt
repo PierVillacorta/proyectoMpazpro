@@ -16,9 +16,12 @@ import cl.duoc.mpazpro.ui.components.AppScaffold
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.material.icons.filled.Star
 
 private const val TAB_OBJETIVOS = "objetivos"
 private const val TAB_INFORMES = "informes"
+
+private const val TAB_DESAFIOS = "desafios"
 
 private fun irATab(nav: NavHostController, ruta: String) {
     nav.navigate(ruta) {
@@ -29,7 +32,12 @@ private fun irATab(nav: NavHostController, ruta: String) {
 }
 
 @Composable
-fun DocenteHomeScreen(db: AppDatabase, usuarioId: Int, onLogout: () -> Unit) {
+fun DocenteHomeScreen(
+    db: AppDatabase,
+    usuarioId: Int,
+    onLogout: () -> Unit,
+    onFormulario: (String) -> Unit = {}
+) {
     val tabsNav = rememberNavController()
     val entradaActual by tabsNav.currentBackStackEntryAsState()
     val rutaActual = entradaActual?.destination?.route
@@ -51,6 +59,12 @@ fun DocenteHomeScreen(db: AppDatabase, usuarioId: Int, onLogout: () -> Unit) {
                     icon = { Icon(Icons.AutoMirrored.Filled.List, contentDescription = null) },
                     label = { Text("Informes") }
                 )
+                NavigationBarItem(
+                    selected = rutaActual == TAB_DESAFIOS,
+                    onClick = { irATab(tabsNav, TAB_DESAFIOS) },
+                    icon = { Icon(Icons.Default.Star, contentDescription = null) },
+                    label = { Text("Desafíos") }
+                )
             }
         }
     ) { padding ->
@@ -61,8 +75,9 @@ fun DocenteHomeScreen(db: AppDatabase, usuarioId: Int, onLogout: () -> Unit) {
             enterTransition = { fadeIn(tween(200)) },
             exitTransition = { fadeOut(tween(200)) }
         ) {
-            composable(TAB_OBJETIVOS) { DocenteObjetivosScreen(db, usuarioId) }
+            composable(TAB_OBJETIVOS) { DocenteObjetivosScreen(db, usuarioId, onFormulario) }
             composable(TAB_INFORMES) { DocenteInformesScreen(db, usuarioId) }
+            composable(TAB_DESAFIOS) { DocenteDesafiosScreen(db, usuarioId) }
         }
     }
 }

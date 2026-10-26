@@ -18,4 +18,7 @@ interface UsuarioDao {
 
     @Query("SELECT * FROM usuarios WHERE id = :id LIMIT 1")
     suspend fun porId(id: Int): Usuario?
+
+    @Query("SELECT COUNT(*) FROM usuarios WHERE LOWER(nombre) = LOWER(:nombre)")
+    suspend fun existeNombre(nombre: String): Int
 }

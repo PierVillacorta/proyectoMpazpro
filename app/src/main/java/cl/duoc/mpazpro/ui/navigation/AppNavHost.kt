@@ -20,6 +20,9 @@ import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import cl.duoc.mpazpro.ui.login.RegistroScreen
+import cl.duoc.mpazpro.ui.formularios.FormularioFuturoScreen
+import cl.duoc.mpazpro.ui.estudiante.ActividadesScreen
 @Composable
 fun AppNavHost(db: AppDatabase) {
     val navController = rememberNavController()
@@ -63,16 +66,35 @@ fun AppNavHost(db: AppDatabase) {
     {
 
         composable(Rutas.LOGIN) {
-            LoginScreen(db = db, onLoginExitoso = { usuario ->
-                val destino = when (usuario.rol) {
-                    Rol.ESTUDIANTE -> Rutas.estudiante(usuario.id)
-                    Rol.DOCENTE -> Rutas.docente(usuario.id)
-                    Rol.UTP -> Rutas.utp(usuario.id)
-                }
-                navController.navigate(destino) {
-                    popUpTo(Rutas.LOGIN) { inclusive = true }
-                }
-            })
+            LoginScreen(
+                db = db,
+                onLoginExitoso = { usuario ->
+                    val destino = when (usuario.rol) {
+                        Rol.ESTUDIANTE -> Rutas.estudiante(usuario.id)
+                        Rol.DOCENTE -> Rutas.docente(usuario.id)
+                        Rol.UTP -> Rutas.utp(usuario.id)
+                    }
+                    navController.navigate(destino) {
+                        popUpTo(Rutas.LOGIN) { inclusive = true }
+                    }
+                },
+                onRegistro = { navController.navigate(Rutas.REGISTRO) },
+                onOlvido = { navController.navigate(Rutas.formulario("recuperar")) }
+            )
+        }
+
+        composable(Rutas.REGISTRO) {
+            RegistroScreen(db = db, onBack = { navController.popBackStack() })
+        }
+
+        composable(
+            Rutas.FORMULARIO,
+            arguments = listOf(navArgument("tipo") { type = NavType.StringType })
+        ) { entry ->
+            FormularioFuturoScreen(
+                tipo = entry.arguments!!.getString("tipo")!!,
+                onBack = { navController.popBackStack() }
+            )
         }
 
         // ---------- ESTUDIANTE ----------
@@ -85,6 +107,16 @@ fun AppNavHost(db: AppDatabase) {
                     navController.navigate(Rutas.unidad(usuarioId, asignatura, unidad))
                 },
                 onLogout = { cerrarSesion() }
+            )
+        }
+        composable(Rutas.ACTIVIDADES, arguments = argUnidad) { entry ->
+            val args = entry.arguments!!
+            ActividadesScreen(
+                db = db,
+                usuarioId = args.getInt("usuarioId"),
+                asignatura = Asignatura.valueOf(args.getString("asignatura")!!),
+                unidad = args.getString("unidad")!!,
+                onBack = { navController.popBackStack() }
             )
         }
 
@@ -101,6 +133,9 @@ fun AppNavHost(db: AppDatabase) {
                 onBack = { navController.popBackStack() },
                 onRendirPrueba = {
                     navController.navigate(Rutas.prueba(usuarioId, asignatura, unidad))
+                },
+                onActividades = {
+                    navController.navigate(Rutas.actividades(usuarioId, asignatura, unidad))
                 }
             )
         }
@@ -141,14 +176,16 @@ fun AppNavHost(db: AppDatabase) {
             DocenteHomeScreen(
                 db = db,
                 usuarioId = entry.arguments!!.getInt("usuarioId"),
-                onLogout = { cerrarSesion() }
+                onLogout = { cerrarSesion() },
+                onFormulario = { tipo -> navController.navigate(Rutas.formulario(tipo)) }
             )
         }
         composable(Rutas.UTP, arguments = argUsuario) { entry ->
             UtpHomeScreen(
                 db = db,
                 usuarioId = entry.arguments!!.getInt("usuarioId"),
-                onLogout = { cerrarSesion() }
+                onLogout = { cerrarSesion() },
+                onFormulario = { tipo -> navController.navigate(Rutas.formulario(tipo)) }
             )
         }
     }

@@ -11,5 +11,8 @@ data class ObjetivoAprendizaje(
     val unidad: String,
     val codigo: String,
     val descripcion: String,
-    val estado: EstadoContenido = EstadoContenido.BORRADOR
+    val estado: EstadoContenido = EstadoContenido.BORRADOR,
+    val eje: String = "",
+    val textoEscolar: String = "",
+    val nivel: String = "Sexto Básico"
 )
