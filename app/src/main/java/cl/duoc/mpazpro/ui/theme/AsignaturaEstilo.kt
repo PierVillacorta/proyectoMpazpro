@@ -5,10 +5,10 @@ import cl.duoc.mpazpro.data.local.enums.Asignatura
 
 val Asignatura.colorTema: Color
     get() = when (this) {
-        Asignatura.LENGUAJE -> Color(0xFFD32F2F)    // rojo
-        Asignatura.MATEMATICA -> Color(0xFF1E88E5)  // azul
-        Asignatura.CIENCIAS -> Color(0xFF2E7D32)    // verde
-        Asignatura.HISTORIA -> Color(0xFFFBC02D)    // amarillo
+        Asignatura.LENGUAJE -> Color(0xFFD32F2F)
+        Asignatura.MATEMATICA -> Color(0xFF1E88E5)
+        Asignatura.CIENCIAS -> Color(0xFF2E7D32)
+        Asignatura.HISTORIA -> Color(0xFFFBC02D)
     }
 
 // Color del texto que va sobre la tarjeta (oscuro sobre amarillo para que se lea)

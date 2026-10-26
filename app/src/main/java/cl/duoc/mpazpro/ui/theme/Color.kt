@@ -3,13 +3,12 @@ package cl.duoc.mpazpro.ui.theme
 import androidx.compose.ui.graphics.Color
 
 // Azul de marca (solo para elementos interactivos)
-val Azul800 = Color(0xFF1565C0)
+val Azul800 = Color(0xFF0E4A8D)
 val Azul200 = Color(0xFF90CAF9)
 val AzulClaro = Color(0xFFD6E4FF)
-val AzulOscuro = Color(0xFF0B2E5C)
-val AzulProfundo = Color(0xFF1F3A63)
+val AzulOscuro = Color(0xFF0C2449)
+val AzulProfundo = Color(0xFF203D6B)
 
-// Neutros claros (fondos sin tinte de color)
 val FondoClaro = Color(0xFFFAFAFA)
 val SuperficieClara = Color(0xFFFFFFFF)
 val TarjetaClara = Color(0xFFECEDEF)
