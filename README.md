@@ -7,7 +7,7 @@ Reemplaza las guías impresas por un recorrido digital: el docente asigna objeti
 
 > **Alcance:** es un Producto Mínimo Viable. Usa únicamente datos ficticios y no corresponde a una plataforma productiva.
 
-## Estudiantes
+## Estudiantes | GRUPO 15
 - Pier Villacorta Aguilar
 - Elizabeth Troncoso Volpi
 
